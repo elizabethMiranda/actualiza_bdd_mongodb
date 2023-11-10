@@ -2,9 +2,21 @@ const express = require('express');
 const app = express();
 const port = 3000;
 
+//Servidr contenido estatico con Middlewares
+app.use( express.static('public'));
+
 app.get('/', (req, res) => {
-  res.send('Hello world!');
+    console.log(req);
+    res.send('Hello world!');
 });
+
+app.get('/hola-mundo', (req, res) => {
+  res.send('Hello mundo en su respectiva');
+});
+
+app.get('*', (req, res) => {
+  res.sendFile(__dirname + '/public/404.html');
+})
 
 app.listen(port, () => {
   console.log(`Server listen on http://localhost:${port}`);
